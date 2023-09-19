@@ -1,41 +1,38 @@
 package com.devmountain.savePoint.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Interactions")
+@Table(name = "Games")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Interaction {
+public class Games {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
-    private String user_table_id;
+    private String title;
 
     @Column
-    private String game_table_id;
+    private int year_released;
 
     @Column
-    private boolean played;
+    private String studio;
 
     @Column
-    private boolean to_play;
+    private String platforms;
 
     @Column
     private int rating;
 
-    @Column(columnDefinition = "text")
-    private String review;
+    @Column
+    private String sequel_of;
 
-    @ManyToOne
-    @JsonBackReference
-    private User user;
-
+    @Column
+    private String prequel_of;
 }
