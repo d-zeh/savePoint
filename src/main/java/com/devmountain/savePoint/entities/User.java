@@ -1,5 +1,7 @@
 package com.devmountain.savePoint.entities;
 
+import com.devmountain.savePoint.dtos.InteractionDto;
+import com.devmountain.savePoint.dtos.UserDto;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -17,7 +19,7 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Column
     private String first_name;
     @Column
@@ -27,10 +29,31 @@ public class User {
     @Column
     private String password;
     @Column
-    private int age;
+    private Integer age;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JsonManagedReference
-    private Set<Interaction> interactionSet = new HashSet<>();
+    private Set<Games> games; // new HashSet<>();
+
+
+    public User(UserDto userDto) {
+        if(userDto.getFirst_name() != null) {
+            this.first_name = userDto.getFirst_name();
+        }
+        if(userDto.getLast_name() != null) {
+            this.last_name = userDto.getLast_name();
+        }
+        if(userDto.getUsername() != null) {
+            this.username = userDto.getUsername();
+        }
+        if(userDto.getPassword() != null) {
+            this.password = userDto.getPassword();
+        }
+        if(userDto.getAge() != null) {
+            this.age = userDto.getAge();
+        }
+
+
+    }
 
 }
