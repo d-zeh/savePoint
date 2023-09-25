@@ -26,4 +26,9 @@ public class UserController {
         return userService.addUser(userDto);
     }
 
+    @PostMapping("/login")
+    public List<String> userLogin(@RequestBody UserDto userDto) {
+        return userService.userLogin(userDto);
+    }
+
 }
