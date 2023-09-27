@@ -2,10 +2,105 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <title> </title>
+    <style>
+        .custom-blue-bar {
+            height: 40vh;
+             background: radial-gradient(ellipse at center, rgba(169, 216, 230, 0.4) 0%, rgba(106, 41, 209, 0.8) 50%);
+        }
+  @import url('https://fonts.googleapis.com/css2?family=Chivo:ital,wght@1,700&display=swap');
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            position: relative;
+            height: 70px
+        }
+        .content {
+            position: absolute;
+            top: 10%;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: rgb(173,216,230);
+            font-family: 'Chivo', sans-serif;
+            -webkit-text-stroke: 2px black;
+            text-stroke: 2px black;
+        }
+        .logo {
+            position: absolute;
+            top: 0;
+            right: 1rem;
+            border-bottom: 2px bg-purple-700;
+            z-index: 1;
+        }
+       .navbar::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: #6B46C1;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: 1;
+        }
+        .floating-box {
+            position: fixed;
+            top: 40%;
+            left: 70%;
+            transform: translate(-50%, -50%) translateX(5vw);
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+            height: 45%;
+            width: 400px;
+        }
+    </style>
 </head>
 <body>
-<h1 class="3xl bg-blue-500">hello, world!</h1>
+<nav class="navbar">
+    <div class="logo">
+        <img src="https://drive.google.com/uc?export=download&id=103GujqKLxMVJ7AG3sjn1MNlo6GWv0iUy" alt="Your Logo" class="h-16 w-auto">
+    </div>
+    <div>
+    </div>
+</nav>
+<div class="fixed top-0 w-full bg-purple-600 p-4 text-white custom-blue-bar">
+
+</div>
+
+<div class="content text-left ml-4 md:ml-0 md:text-center text-5xl font-semibold text-blue-200 md:w-1/2">
+    <p>Keep track of all your games, and </p>
+    <p>all those recs you get from friends.</p>
+    <p> And all in one place! </p>
+</div>
+<div class="floating-box  ">
+    <h2 class="text-2xl font-semibold mb-4 flex flex-col items-center">Login below</h2>
+    <form id="loginForm">
+        <div class="mb-4">
+            <label for="usernameLogin" class="block text-gray-700 text-sm font-bold mb-2">Username:</label>
+            <input type="text" id="usernameLogin" name="username" class="border rounded-lg px-3 py-2 w-full">
+        </div>
+        <div class="mb-4">
+            <label for="passwordLogin" class="block text-gray-700 text-sm font-bold mb-2">Password:</label>
+            <input type="password" id="passwordLogin" name="password" class="border rounded-lg px-3 py-2 w-full">
+        </div>
+        <div class="text-center">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
+                Login
+            </button>
+            <span class="text-gray-700 text-sm ml-2">or</span>
+            <a href="#" class="text-blue-500 text-sm ml-2 hover:underline">Register now!</a>
+        </div>
+    </form>
+</div>
 </body>
 </html>
