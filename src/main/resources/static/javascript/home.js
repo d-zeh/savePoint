@@ -38,19 +38,40 @@ const handleSubmit = async (e) =>{
 
     const responseArr = await response.json()
 
-    if(response.status == 200) {
-    console.log("This is connected");
-    if(responseArr[0] == "User Login Successful") {
-    alert(responseArr[0])
-    document.cookie = `userId=${responseArr[1]}`
-    window.location.replace(responseArr[0])
+//    if(response.status == 200) {
+//    console.log("This is connected");
+//    if(responseArr[0] == "User Login Successful") {
+//    alert(responseArr[0])
+//    document.cookie = `userId=${responseArr[1]}`
+//    window.location.replace(responseArr[0])
+//
+//    }
+//
+//
+//    } else {
+//    alert("Oh oh! Your username or password was incorrect. Get fucked!")
+//    }
 
-    }
+if (response.status === 200) {
+    const loginSuccessModal = document.getElementById("loginSuccessModal");
+    loginSuccessModal.classList.remove("hidden");
+
+    // Close the pop --up after 3 seconds
+    console.log("test 1")
+    setTimeout(() => {
+    loginSuccessModal.classList.add("hidden");
+        console.log("test 2")
+        document.cookie = `userId=${responseArr[1]}`
+        window.location.replace(responseArr[0])
+    }, 3000);
 
 
-    } else {
-    alert("Oh oh! Your username or password was incorrect. Get fucked!")
-    }
+
+
+
+} else{
+alert("Oh, no! Something went wrong!")
+}
     }
 
 
@@ -118,7 +139,9 @@ if (response.status === 200) {
     // Close the pop-up after 3 seconds
     setTimeout(() => {
         registrationSuccessModal.classList.add("hidden");
-    }, 5000); // 3000 milliseconds (3 seconds)
+    }, 3000); // 3000 milliseconds (3 seconds)
+} else{
+alert("Oh, no! Something went wrong!")
 }
 }
 
