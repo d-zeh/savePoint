@@ -86,7 +86,7 @@ const handleRegisterSubmit = async (e) =>{
 
     if(registerPassword.value != registerPassword2.value) {
     alert("Your passwords are not the same!")
-    }
+    } else{
 
     let bodyObj = {
         username: registerUsername.value,
@@ -103,23 +103,27 @@ const handleRegisterSubmit = async (e) =>{
     headers: headers
     })
 
-    const responseArr = await response.json()
+    const responseArr = await response.json();
+
+
+
+if (response.status === 200) {
+    const registeredFirstName = responseArr.first_name;
+    console.log("pop up should happen now");
+    // Show the pop-up box and hide register box
+    registerModal.classList.add("hidden");
+    const registrationSuccessModal = document.getElementById("registrationSuccessModal");
+    registrationSuccessModal.classList.remove("hidden");
+
+    // Close the pop-up after 3 seconds
+    setTimeout(() => {
+        registrationSuccessModal.classList.add("hidden");
+    }, 5000); // 3000 milliseconds (3 seconds)
+}
+}
+
     }
 
-
-//    if(response.status == 200) {
-//    console.log("This is connected");
-//    if(responseArr[0] == "User Login Successful") {
-//    alert(responseArr[0])
-//    document.cookie = `userId=${responseArr[1]}`
-//    window.location.replace(responseArr[0])
-//
-//    }
-//
-//
-//    } else {
-//    alert("Oh oh! Your username or password was incorrect. Get fucked!")
-//    }
 
 registerForm.addEventListener('submit', handleRegisterSubmit);
 
