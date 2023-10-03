@@ -1,5 +1,3 @@
-//Login Functionality!
-
 console.log(document);
 const loginUsername = document.getElementById('usernameLogin');
 const loginPassword = document.getElementById('passwordLogin');
@@ -12,13 +10,11 @@ const registerLast_Name = document.getElementById('lastNameRegister');
 const registerAge = document.getElementById('ageRegister');
 const registerForm = document.getElementById('registerForm')
 
-
+/////LOGIN FUNCTION, check db for user and send to Profile Page
 const headers = {
     'Content-Type' : 'application/json'
 }
-
 const baseUrl = 'http://localhost:8080/api/v1/users'
-
 const handleSubmit = async (e) =>{
     console.log("Before the prevent Default");
     e.preventDefault();
@@ -28,31 +24,14 @@ const handleSubmit = async (e) =>{
     username: loginUsername.value,
     password: loginPassword.value
     }
-
-
     const response = await fetch(`${baseUrl}/login`,{
     method: "POST",
     body: JSON.stringify(bodyObj),
     headers: headers
     })
-
     const responseArr = await response.json()
 
-//    if(response.status == 200) {
-//    console.log("This is connected");
-//    if(responseArr[0] == "User Login Successful") {
-//    alert(responseArr[0])
-//    document.cookie = `userId=${responseArr[1]}`
-//    window.location.replace(responseArr[0])
-//
-//    }
-//
-//
-//    } else {
-//    alert("Oh oh! Your username or password was incorrect. Get fucked!")
-//    }
-
-if (response.status === 200) {
+    if (response.status === 200) {
     const loginSuccessModal = document.getElementById("loginSuccessModal");
     loginSuccessModal.classList.remove("hidden");
 
@@ -64,22 +43,17 @@ if (response.status === 200) {
         document.cookie = `userId=${responseArr[1]}`
         window.location.replace(responseArr[0])
     }, 3000);
-
-
-
-
-
-} else{
-alert("Oh, no! Something went wrong!")
-}
+    } else{
+    alert("Oh, no! Something went wrong!")
     }
-
-
-
+}
 loginForm.addEventListener("submit", handleSubmit)
 
-//Register Functionality
 
+
+
+
+//Register Functionality
 const registerLink = document.getElementById("registerLink")
 const registerModal = document.getElementById('registerModal');
 const closeModalButton = document.getElementById('closeModal');
@@ -89,14 +63,6 @@ registerLink.addEventListener('click', () => {
 closeModalButton.addEventListener('click', () => {
   registerModal.classList.add('hidden');
 });
-//const registerForm = document.getElementById('registerForm');
-//registerForm.addEventListener('submit', async (e) => {
-//  e.preventDefault();
-
-
-
-
-
 
 ///take register information and add to the my SUPERBASEEEE
 
@@ -116,17 +82,12 @@ const handleRegisterSubmit = async (e) =>{
         last_name: registerLast_Name.value,
         age: registerAge.value,
     }
-
-
     const response = await fetch(`${baseUrl}/register`,{
     method: "POST",
     body: JSON.stringify(bodyObj),
     headers: headers
     })
-
     const responseArr = await response.json();
-
-
 
 if (response.status === 200) {
     const registeredFirstName = responseArr.first_name;
@@ -144,9 +105,7 @@ if (response.status === 200) {
 alert("Oh, no! Something went wrong!")
 }
 }
-
-    }
-
+}
 
 registerForm.addEventListener('submit', handleRegisterSubmit);
 

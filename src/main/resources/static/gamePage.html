@@ -7,10 +7,174 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <title> </title>
     <style>
+        .custom-blue-bar {
+            height: 100vh;
+             background: radial-gradient(ellipse at center, rgba(169, 216, 230, 0.4) 0%, rgba(106, 41, 209, 0.8) 50%);
+        }
+  @import url('https://fonts.googleapis.com/css2?family=Chivo:ital,wght@1,700&display=swap');
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            position: relative;
+            height: 70px
+        }
+        .content {
+            position: absolute;
+            top: 10%;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: rgb(173,216,230);
+            font-family: 'Chivo', sans-serif;
+            -webkit-text-stroke: 2px black;
+            text-stroke: 2px black;
+        }
+        .logo {
+            position: absolute;
+            top: 0;
+            right: 1rem;
+            border-bottom: 2px bg-purple-700;
+            z-index: 1;
+        }
+       .navbar::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: #6B46C1;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: 1;
+        }
+        #addNewGameButton {
+            background-color: black; /* Black background */
+            color: white; /* White text */
+            position: absolute;
+            top: 90px; /* Adjust the top position as needed */
+            right: 1rem;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #addNewGameButton:hover {
+            background-color: #333; /* Darken the background on hover */
+        }
 
     </style>
 </head>
-<body>
 
+
+
+
+
+
+
+
+
+
+<body>
+<nav class="navbar">
+    <div class="logo">
+        <img src="https://drive.google.com/uc?export=download&id=103GujqKLxMVJ7AG3sjn1MNlo6GWv0iUy" alt="Your Logo" class="h-16 w-auto">
+    </div>
+</nav>
+<div class="fixed top-0 w-full  bg-purple-600 p-4 text-white custom-blue-bar">
+</div>
+<div class="content text-left ml-4 md:ml-0 md:text-center text-5xl font-semibold text-blue-200 md:w-1/2">
+</div>
+<button id="addNewGameButton">
+    Add New Game
+</button>
+
+
+
+
+
+
+<div id="addGameModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+    <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+
+    <div class="modal-container bg-black text-white w-full md:max-w-lg mx-auto rounded shadow-lg z-50 overflow-y-auto">
+        <div class="modal-content py-4 px-6 text-center">
+            <div class="text-center">
+
+
+                <h2 class="text-2xl font-semibold mb-4">Add a New Game!</h2>
+                savePoint is great because of contributors like you! Add a new game to our shared Library!
+                <form id="addForm">
+                <div class="grid grid-cols-2 gap-4">
+
+                    <div class="mb-4">
+                        <label for="addTitle" class="block text-white text-sm font-bold mb-2">Game Title: </label>
+                        <input type="text" id="addTitle" name="Title"  class="border rounded-lg px-3 py-2 w-full text-black">
+                    </div>
+                    <div class="mb-4">
+                        <label for="addGameStudio" class="block text-white text-sm font-bold mb-2">Studio: </label>
+                        <input type="text" id="addGameStudio" name="studio" class="border rounded-lg px-3 py-2 w-full text-black">
+                    </div>
+                    <div class="mb-4">
+                        <label for="addPlatforms" class="block text-white text-sm font-bold mb-2">Platforms: </label>
+                        <input type="text" id="addPlatforms" name="platforms" class="border rounded-lg px-3 py-2 w-full text-black">
+                    </div>
+                    <div class="mb-4">
+                        <label for="addYear" class="block text-white text-sm font-bold mb-2">Year released: </label>
+                        <input type="text" id="addYear" name="Year" class="border rounded-lg px-3 py-2 w-full text-black" >
+                    </div>
+
+
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
+                    Save
+                </button>
+                <button id="closeModal" class="bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline-blue active:bg-gray-600 ml-2">
+                    Close
+                </button>
+            </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--successfull video game add popup box-->
+<div id="loginSuccessModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+    <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+
+    <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+        <div class="modal-content py-4 text-center">
+            <img src="https://66.media.tumblr.com/1df7498157ff311a31d54e67cb5ea97e/3565bb3d3251457e-4a/s500x750/acf4b1894301a3cc3cee8653d2997de3410fdb6d.gif" alt="Thanks for signing up" class="mx-auto mb-4">
+            <p>Save Complete!</p>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--Geneate boxes for the video games in database-->
+
+
+
+<div class="flex flex-wrap justify-between p-4">
+    <!-- Game box template (hidden) -->
+    <div id="gameBoxTemplate" class="w-80 h-12vh hidden ">
+        <div class="bg-white border rounded-lg p-4 m-4">
+            <!-- Add game details here -->
+        </div>
+    </div>
+
+    <!-- JavaScript will populate game boxes here -->
+</div>
+
+
+
+
+<script src="./javascript/gamePage.js"></script>
 </body>
 </html>
