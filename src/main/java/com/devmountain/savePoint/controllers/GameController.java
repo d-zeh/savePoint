@@ -7,12 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/games")
 public class GameController {
     @Autowired
     private GamesService gamesService;
+
+    //Get a game
+    @GetMapping("/{gameId}")
+    public Optional<GamesDto> getGamesById(@PathVariable Long gameId){
+        return gamesService.getGamesById(gameId);
+    }
+
 
     //Makes a new game
     @PostMapping("/newGame")
