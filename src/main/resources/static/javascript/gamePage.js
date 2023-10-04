@@ -206,32 +206,114 @@ const myLibraryLink = document.getElementById("myLibraryLink");
 const toPlayShelf = document.getElementById("toPlayShelf");
 const playedShelf = document.getElementById("playedShelf");
 
+
 myLibraryLink.addEventListener("click", () => {
+console.log("My Library link clicked");
     // Toggle the visibility of the shelves when the link is clicked
     toPlayShelf.classList.toggle("hidden");
     playedShelf.classList.toggle("hidden");
+
+     toPlayShelfTitle.style.display = toPlayShelf.classList.contains("hidden") ? "none" : "block";
+     playedShelfTitle.style.display = playedShelf.classList.contains("hidden") ? "none" : "block";
+
+    // Populate the shelves when the link is clicked
+    populateToPlayShelf();
+    populatePlayedShelf();
 });
 
 let playedArr = [];
 let toPlayArr = [];
 
 
-function addToSelectedGames(gameName, action) {
-  // Check the action parameter to determine whether the game is played or to-play
-  if (action === "played") {
-    console.log(`Marked "${gameName}" as Played.`);
-    playedArr.push(gameName)
-    console.log(playedArr)
-    // Add your logic for handling the "Played" action here
-  } else if (action === "to-play") {
-    console.log(`Marked "${gameName}" as To-Play.`);
-    toPlayArr.push(gameName)
-    console.log(toPlayArr)
-    // Add your logic for handling the "To-Play" action here
+function addToSelectedGames(gameId, action) {
+  // Find the game in the gamesData array by its ID
+  const game = gamesData.find((game) => game.id === gameId);
+
+  if (game) {
+    if (action === "played") {
+      console.log(`Marked "${game.title}" as Played.`);
+      playedArr.push(game);
+      console.log(playedArr);
+      // Add your logic for handling the "Played" action here
+    } else if (action === "to-play") {
+      console.log(`Marked "${game.title}" as To-Play.`);
+      toPlayArr.push(game);
+      console.log(toPlayArr);
+      // Add your logic for handling the "To-Play" action here
+    }
+  } else {
+    console.log(`Game with ID ${gameId} not found.`);
   }
 }
 
 
 
+
+
+function populateToPlayShelf() {
+  const toPlayShelfContainer = document.getElementById("toPlayShelf");
+  toPlayShelfContainer.innerHTML = '<h2 class="text-3xl text-center font-semibold mb-4">To Play Shelf</h2>'; // Clear existing content
+
+
+  toPlayArr.forEach((game, index) => {
+    // Create a new element to display game information
+    const gameElement = document.createElement("div");
+    gameElement.classList.add("bg-black", "text-white", "rounded", "p-2", "mb-2");
+
+    // Remove double quotes from the title using JSON.parse()
+    const title = JSON.parse(game.title);
+
+    // Populate the element with game information
+    gameElement.innerHTML = `
+      <h3 class="text-lg font-semibold">${title}</h3>
+      <p>Studio: ${game.studio}</p>
+      <p>Platforms: ${game.platforms}</p>
+      <p>Year Released: ${game.year}</p>
+      <button class="bg-red-500 hover:bg-red-600 text-white font-bold rounded-full px-2 py-1 mt-2"
+        onclick="removeGame(${index}, 'to-play')">Remove</button>
+    `;
+
+    toPlayShelfContainer.appendChild(gameElement);
+  });
+}
+
+
+
+
+function populatePlayedShelf() {
+  const playedShelfContainer = document.getElementById("playedShelf");
+  playedShelfContainer.innerHTML = '<h2 class="text-3xl text-center font-semibold mb-4">Played Shelf</h2>'; // Clear existing content
+
+  playedArr.forEach((game, index) => {
+    // Create a new element to display game information
+    const gameElement = document.createElement("div");
+    gameElement.classList.add("bg-black", "text-white", "rounded", "p-2", "mb-2");
+
+    // Remove double quotes from the title using JSON.parse()
+    const title = JSON.parse(game.title);
+
+    // Populate the element with game information
+    gameElement.innerHTML = `
+      <h3 class="text-lg font-semibold">${title}</h3>
+      <p>Studio: ${game.studio}</p>
+      <p>Platforms: ${game.platforms}</p>
+      <p>Year Released: ${game.year}</p>
+      <button class="bg-red-500 hover:bg-red-600 text-white font-bold rounded-full px-2 py-1 mt-2"
+        onclick="removeGame(${index}, 'played')">Remove</button>
+    `;
+
+    playedShelfContainer.appendChild(gameElement);
+  });
+}
+
+function removeGame(index, action) {
+  if (action === "played") {
+    playedArr.splice(index, 1);
+    populatePlayedShelf();
+  } else if (action === "to-play") {
+    toPlayArr.splice(index, 1);
+    populateToPlayShelf();
+  }
+}
 
 

@@ -15,7 +15,7 @@
   @import url('https://fonts.googleapis.com/css2?family=Chivo:ital,wght@1,700&display=swap');
         .navbar {
             display: flex;
-            justify-content: start;
+            justify-content: space-evenly;
             text-align: center;
             align-items: center;
             padding: 1rem;
@@ -36,7 +36,7 @@
         .logo {
             position: absolute;
             top: 0;
-            right: 1rem;
+            right: 3rem;
             border-bottom: 2px bg-purple-700;
             z-index: 100;
         }
@@ -61,14 +61,14 @@
             text-align: center;
             flex-grow: 1;
             margin: 0 auto;
-            font-size: 40px;
+            font-size: 50px;
     }
 .shelf {
     position: fixed;
     top: 70px;
     width: calc(50% - 50px);
     height: 80%;
-    background-color: white;
+    background-color: black;
     z-index: 100;
     overflow-y: auto;
     border-radius: 10px;
@@ -86,7 +86,7 @@
             color: white;
             position: absolute;
             top: 90px;
-            right: 1rem;
+            right: 5rem;
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
@@ -103,6 +103,18 @@
             border-radius: 5px;
             cursor: pointer;
 }
+.navbar-header {
+    text-align: center;
+    flex-grow: 1;
+    margin: 0 auto;
+    font-size: 30px; /* Adjust the font size as needed */
+    color: white;
+    padding: 1rem; /* Add padding to the header */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add text shadow for better visibility */
+}
+
+
+}
 
     </style>
 </head>
@@ -115,12 +127,26 @@
 
 <div class="fixed top-0 w-full bg-purple-600 p-4 text-white custom-blue-bar">
 
-    <nav class="navbar">
+
+    <div class="fixed top-0 left-0 right-0 bg-black bg-opacity-0 p-4 text-white text-center">
+        <div class="text-4xl font-semibold">
+            Never forget a game again!
+        </div>
+    </div>
+
+
+
+    <nav class="navbar flex justify-between items-center h-16 fixed ">
         <div class="logo">
             <img src="https://drive.google.com/uc?export=download&id=103GujqKLxMVJ7AG3sjn1MNlo6GWv0iUy" alt="Your Logo" class="h-16 w-auto">
         </div>
         <div class="navbar-title">Game Library</div>
-        <div class="my-library-link cursor-pointer text-white ml-2 " id="myLibraryLink">
+
+<!--        <div class="navbar-header text-white text-3xl font-semibold">-->
+<!--            Never forget a game again!-->
+<!--        </div>-->
+
+        <div class="my-library-link  cursor-pointer text-white ml-2 " id="myLibraryLink">
             My Library
         </div>
 
@@ -199,19 +225,39 @@
 
     <div class="scroll-container max-h-screen overflow-y-auto">
         <div id="gameContainer" class="grid grid-cols-2 gap-2 p-4 scroll-container">
-        <div id="gameBoxTemplate" class="relative w-full bg-white border rounded-lg p-4 m-4 hidden" style="background-color: white;">
-            <div class="bg-white border rounded-lg p-4 m-4">
+            <div id="gameBoxTemplate" class="relative w-full bg-white border rounded-lg p-4 m-4 hidden" style="background-color: white;">
+                <div class="bg-white border rounded-lg p-4 m-4">
+                    <!-- Existing content for game information -->
+
+                    <!-- Shelf titles -->
+                    <div class="absolute bottom-2 right-2 text-white text-xs">
+                        <p id="playedShelfTitle" class="hidden">Played Shelf</p>
+                        <p id="toPlayShelfTitle" class="hidden">To Play Shelf</p>
+                    </div>
+                </div>
             </div>
+
         </div>
-        </div>
     </div>
 
 
 
-    <div id="toPlayShelf" class="shelf hidden">
+    <div id="toPlayShelf" class="shelf hidden bg-black text-white rounded p-4">
+        <h2 class="text-3xl text-center font-semibold mb-4">To Play Shelf</h2>
     </div>
-    <div id="playedShelf" class="shelf hidden">
+    <div id="playedShelf" class="shelf hidden bg-black text-white rounded p-4">
+        <h2 class="text-3xl text-center font-semibold mb-4">Played Shelf</h2>
     </div>
+
+
+    <div id="libraryActions" class="fixed top-0 left-0 right-0 h-16 bg-gray-800 text-white text-center p-4 hidden flex items-center justify-center">
+        <h2 id="playedTitle" class="text-xl font-semibold">Played Shelf</h2>
+        <h2 id="toPlayTitle" class="text-xl font-semibold">To-Play Shelf</h2>
+    </div>
+
+
+
+
 
 
 

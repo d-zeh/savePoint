@@ -39,13 +39,20 @@ const handleSubmit = async (e) =>{
     console.log("test 1")
     setTimeout(() => {
     loginSuccessModal.classList.add("hidden");
-        console.log("test 2")
-        document.cookie = `userId=${responseArr[1]}`
-        window.location.replace(responseArr[0])
-    }, 3000);
-    } else{
-    alert("Oh, no! Something went wrong!")
+
+
+
+        document.cookie = `userId=${responseArr[1]}`;
+        window.location.href = "http://localhost:8080/gamePage.html";
+      }, 3000);
+    } else {
+      alert("Oh, no! Something went wrong!");
     }
+
+
+
+
+
 }
 loginForm.addEventListener("submit", handleSubmit)
 
